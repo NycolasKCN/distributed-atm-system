@@ -1,5 +1,6 @@
 package com.nycolas.sistemadistribuido.sistemabancario.costumer.model;
 
+import com.nycolas.sistemadistribuido.sistemabancario.account.model.Account;
 import com.nycolas.sistemadistribuido.sistemabancario.costumer.dto.CostumerDTO;
 import com.nycolas.sistemadistribuido.sistemabancario.costumer.dto.CreateCostumerDTO;
 import jakarta.persistence.*;
@@ -30,6 +31,8 @@ public class Costumer implements UserDetails {
     private String firstName;
     @Column(name="last_name")
     private String lastName;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "costumer", cascade = CascadeType.ALL)
+    private List<Account> accounts;
 
     public Costumer() {
 

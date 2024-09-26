@@ -8,7 +8,7 @@ logging:
           sistemabancario: trace
     org:
       springframework:
-        security: debug
+        security: trace
 management:
   endpoints:
     web:
