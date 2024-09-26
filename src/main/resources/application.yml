@@ -5,5 +5,6 @@ spring:
     active: dev
 security:
   jwt:
+#   TODO: Change security key
     secret-key: 4aedeb75fc923d2612cafe44c3947821e954f227f0995cf374e44c6930d41f76
     expiration: 3600000
