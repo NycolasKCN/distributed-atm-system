@@ -33,7 +33,7 @@ public class AccountServiceImpl implements AccountService{
     public AccountDTO createAccount(Costumer owner, AccountType accType) {
         Account account = new Account(owner, accType, generateAccountNumber() , 0.0);
 
-        log.trace("Creating account {}", account);
+        log.trace("Creating account: {}", account);
 
         return accountRepository.save(account).toDto();
     }

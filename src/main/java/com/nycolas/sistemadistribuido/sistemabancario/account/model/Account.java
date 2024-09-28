@@ -6,10 +6,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 @Setter
-@Table(name = "account")
+@Table(name = "accounts")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,6 +35,11 @@ public class Account {
         this.currentBalance = currentBalance;
     }
 
+    public Double deposit(double amount) {
+        this.currentBalance += amount;
+        return this.currentBalance;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
@@ -44,21 +51,25 @@ public class Account {
                 '}';
     }
 
+    public AccountDTO toDto() {
+        return new AccountDTO(costumer.toDto(), type, accountNumber, currentBalance);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Account account = (Account) o;
-        return accountNumber.equals(account.accountNumber);
+        return Objects.equals(id, account.id) && Objects.equals(costumer, account.costumer) && type == account.type && Objects.equals(accountNumber, account.accountNumber);
     }
 
     @Override
     public int hashCode() {
-        return accountNumber.hashCode();
-    }
-
-    public AccountDTO toDto() {
-        return new AccountDTO(costumer.toDto(),type, accountNumber, currentBalance);
+        int result = Objects.hashCode(id);
+        result = 31 * result + Objects.hashCode(costumer);
+        result = 31 * result + Objects.hashCode(type);
+        result = 31 * result + Objects.hashCode(accountNumber);
+        return result;
     }
 }
