@@ -40,6 +40,11 @@ public class Account {
         return this.currentBalance;
     }
 
+    public Double withdrawal(double amount) {
+        this.currentBalance -= amount;
+        return this.currentBalance;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
@@ -72,4 +77,6 @@ public class Account {
         result = 31 * result + Objects.hashCode(accountNumber);
         return result;
     }
+
+
 }
