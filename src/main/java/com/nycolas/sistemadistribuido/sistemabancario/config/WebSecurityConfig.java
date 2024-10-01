@@ -33,6 +33,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/v1/api/user").permitAll()
                         .requestMatchers(HttpMethod.POST, "/v1/api/auth").permitAll()
                         .requestMatchers("/error").permitAll()
+                        .requestMatchers("/replica").permitAll()
                         .requestMatchers("/h2-console").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -1,0 +1,39 @@
+services:
+  db:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=${POSTGRES_DB}'
+      - 'POSTGRES_PASSWORD=${POSTGRES_PASSWORD}'
+      - 'POSTGRES_USER=${POSTGRES_USER}'
+    ports:
+      - 54321:5432
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - distributed-atm-net
+
+  distributed-atm:
+    image: distributed-atm-image
+    depends_on:
+      - db
+    ports:
+      - 8080:8080
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+    environment:
+      REPLICA_INDEX: '{{.Task.Slot}}'
+    networks:
+      - distributed-atm-net
+
+networks:
+  distributed-atm-net:
+    driver: overlay
+
+volumes:
+  db-data:
