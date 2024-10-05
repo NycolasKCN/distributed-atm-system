@@ -37,5 +37,18 @@ public class AccountController {
         return this.accountService.createCheckingAccount(logedCostumer);
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/type/savings")
+    public AccountDTO getSavingAccount(Authentication auth) {
+        Costumer logedCostumer = (Costumer) auth.getPrincipal();
+        return this.accountService.getSavingAccount(logedCostumer);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/type/checking")
+    public AccountDTO getCheckingAccount(Authentication auth) {
+        Costumer logedCostumer = (Costumer) auth.getPrincipal();
+        return this.accountService.getCheckingAccount(logedCostumer);
+    }
 
 }

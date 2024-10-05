@@ -7,6 +7,5 @@ spring:
     active: ${APP_PROFILE}
 security:
   jwt:
-#   TODO: Change security key
     secret-key: ${JWT_SECRET}
     expiration: 3600000
